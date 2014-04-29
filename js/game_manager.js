@@ -1,9 +1,10 @@
-function GameManager(size, InputManager, Actuator, StorageManager, Timer) {
+function GameManager(size, time, InputManager, Actuator, StorageManager, Timer) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
-  this.timer          = new Timer(300);
+  this.time           = time;
+  this.timer          = new Timer(this.time);
 
   this.startTiles     = 2;
 
@@ -48,6 +49,7 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+  this.actuator.updateTime(this.time);
 };
 
 // Set up the initial tiles to start the game with
