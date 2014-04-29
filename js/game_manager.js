@@ -1,14 +1,17 @@
-function GameManager(size, InputManager, Actuator, StorageManager) {
+function GameManager(size, InputManager, Actuator, StorageManager, Timer) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
+  this.timer          = new Timer(10);
 
   this.startTiles     = 2;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.timer.onTimeup(this.timeup.bind(this));
+  this.timer.onInterval(this.interval.bind(this));
 
   this.setup();
 }
@@ -132,6 +135,10 @@ GameManager.prototype.move = function (direction) {
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
+
+  if (!this.timer.started) {
+    this.timer.start();
+  }
 
   var cell, tile;
 
@@ -269,4 +276,13 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
 GameManager.prototype.positionsEqual = function (first, second) {
   return first.x === second.x && first.y === second.y;
+};
+
+GameManager.prototype.timeup = function() {
+    this.over = true;
+    this.actuate();
+};
+
+GameManager.prototype.interval = function(data) {
+    this.actuator.updateTime(data);
 };

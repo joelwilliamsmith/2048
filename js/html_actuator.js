@@ -3,6 +3,8 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.time             = document.querySelector(".time-remaining");
+  this.gameContainer    = document.querySelector(".game-container");
 
   this.score = 0;
 }
@@ -31,7 +33,6 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
         self.message(true); // You win!
       }
     }
-
   });
 };
 
@@ -137,3 +138,15 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
 };
+
+HTMLActuator.prototype.updateTime = function(data) {
+  if (data < 6) {
+    this.applyClasses(this.time, ['red']);
+  }
+  var mins = parseInt(data / 60 );
+  var seconds = data % 60;
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  this.time.textContent = mins + ":" + seconds;
+}
