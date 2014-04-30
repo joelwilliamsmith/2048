@@ -46,6 +46,7 @@ GameManager.prototype.setup = function () {
   // Add the initial tiles
   this.addStartTiles();
 
+  this.timer.stop();
 
   // Update the actuator
   this.actuate();

@@ -36,9 +36,13 @@ Timer.prototype.interval = function() {
     }
 };
 
-Timer.prototype.timeup = function() {
+Timer.prototype.stop = function() {
     this.started = false;
     clearInterval(this.countdown);
+};
+
+Timer.prototype.timeup = function() {
+    this.stop();
     this.timeupCallbacks.forEach(function (callback) {
       callback();
     });
