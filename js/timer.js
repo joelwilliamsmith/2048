@@ -4,7 +4,7 @@ function Timer(totalTime) {
     this.countdown = {};
     this.timeupCallbacks = [];
     this.intervalCallbacks = [];
-    this.totalTime = totalTime ? totalTime : 10; //default 10 seconds
+    this.totalTime = totalTime ? totalTime : 300; //default 5 mins
     this.elapsed;
 }
 

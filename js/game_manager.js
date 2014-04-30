@@ -182,6 +182,7 @@ GameManager.prototype.move = function (direction) {
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+      this.timer.timeup();
     }
 
     this.actuate();
