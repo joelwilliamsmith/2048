@@ -141,7 +141,9 @@ HTMLActuator.prototype.clearMessage = function () {
 
 HTMLActuator.prototype.updateTime = function(data) {
   if (data < 6) {
-    this.applyClasses(this.time, ['red']);
+    this.applyClasses(this.time, ['time-remaining', 'last-seconds']);
+  } else {
+    this.applyClasses(this.time, ['time-remaining']);
   }
   var mins = parseInt(data / 60 );
   var seconds = data % 60;

@@ -472,6 +472,15 @@ hr {
   margin-top: 50px;
 }
 
+.time-remaining {
+  font-size: 50px;
+  text-align: center;
+
+  &.last-seconds {
+    color: #f65e3b;
+  }
+}
+
 @include smaller($mobile-threshold) {
   // Redefine variables for smaller screens
   $field-width: 280px;
@@ -545,5 +554,8 @@ hr {
     .lower {
       margin-top: 30px !important;
     }
+  }
+  .time-remaining {
+    font-size: 25px;
   }
 }
